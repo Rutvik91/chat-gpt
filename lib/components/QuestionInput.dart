@@ -1,10 +1,13 @@
 import 'package:aichat/page/purchase_controller.dart';
+import 'package:aichat/page/purchase_screen.dart';
 import 'package:aichat/stores/AIChatStore.dart';
 import 'package:aichat/utils/Chatgpt.dart';
 import 'package:aichat/utils/Config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 GlobalKey<_QuestionInputState> globalQuestionInputKey = GlobalKey();
@@ -130,32 +133,32 @@ class _QuestionInputState extends State<QuestionInput> {
   }
 
   void onSubmit() async {
-    // if (!purchaseController.proUser.value) {
-    //   int? messageCount = GetStorage().read('message_count');
-    //   int? milliseconds = GetStorage().read('last_time');
-    //   if (milliseconds == null) {
-    //     GetStorage().write('last_time', DateTime.now().millisecondsSinceEpoch);
-    //   }
-    //
-    //   if (messageCount != null &&
-    //       messageCount >= 10 &&
-    //       milliseconds != null &&
-    //       DateTime.now()
-    //               .difference(DateTime.fromMillisecondsSinceEpoch(milliseconds))
-    //               .inHours <=
-    //           12) {
-    //     GetStorage().write('last_time', DateTime.now().millisecondsSinceEpoch);
-    //     showCupertinoModalBottomSheet(
-    //       context: context,
-    //       isDismissible: false,
-    //       enableDrag: false,
-    //       builder: (context) => PurchaseScreen(),
-    //     );
-    //     return;
-    //   } else {
-    //     GetStorage().write('message_count', (messageCount ?? 0) + 1);
-    //   }
-    // }
+    if (!_purchaseController.proUser.value) {
+      int? messageCount = GetStorage().read('message_count');
+      int? milliseconds = GetStorage().read('last_time');
+      if (milliseconds == null) {
+        GetStorage().write('last_time', DateTime.now().millisecondsSinceEpoch);
+      }
+
+      if (messageCount != null &&
+          messageCount >= 10 &&
+          milliseconds != null &&
+          DateTime.now()
+                  .difference(DateTime.fromMillisecondsSinceEpoch(milliseconds))
+                  .inHours <=
+              12) {
+        GetStorage().write('last_time', DateTime.now().millisecondsSinceEpoch);
+        showCupertinoModalBottomSheet(
+          context: context,
+          isDismissible: false,
+          enableDrag: false,
+          builder: (context) => PurchaseScreen(),
+        );
+        return;
+      } else {
+        GetStorage().write('message_count', (messageCount ?? 0) + 1);
+      }
+    }
 
     final store = Provider.of<AIChatStore>(context, listen: false);
     if (myQuestion == '') {
