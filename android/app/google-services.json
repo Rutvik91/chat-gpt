@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "387880839929",
+    "project_id": "chat-buddy-e59fd",
+    "storage_bucket": "chat-buddy-e59fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387880839929:android:db52aa39befa9f04e59028",
+        "android_client_info": {
+          "package_name": "com.binarybox.chatbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387880839929-cldede5nkasoi5ad2hkgm9fsj6hjuukh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfrlaScOIDP-ulfa3G4R4ei1KV5RSX8Yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387880839929-cldede5nkasoi5ad2hkgm9fsj6hjuukh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "387880839929-acn4o8sefvvt0dluhn53defvjacie66s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.binarybox.chatbuddy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
