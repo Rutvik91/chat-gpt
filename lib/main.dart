@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:aichat/components/HideKeyboard.dart';
 import 'package:aichat/page/AppOpenPage.dart';
@@ -20,9 +19,10 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) {});
-  await Purchases.configure(PurchasesConfiguration((Platform.isAndroid)
-      ? "goog_PBPFtsvocEdpZRFRiKUDycxqcWn"
-      : "appl_WnmVuMzzpAdeNeZIsDlQpGsyQuN"));
+  await Purchases.configure(
+      PurchasesConfiguration("appl_WnmVuMzzpAdeNeZIsDlQpGsyQuN"));
+  await Purchases.enableAdServicesAttributionTokenCollection();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.black,
   ));

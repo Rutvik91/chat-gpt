@@ -1,12 +1,14 @@
 import 'package:aichat/page/purchase_controller.dart';
+import 'package:aichat/page/terms_and_conditions.dart';
 import 'package:aichat/utils/Config.dart';
+import 'package:aichat/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PurchaseScreen extends StatelessWidget {
   PurchaseScreen({super.key});
 
-  final PurchaseController _controller = Get.find();
+  final PurchaseController _controller = Get.find()..fetchSubscriptions();
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +271,8 @@ class PurchaseScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                _controller.purchase('weekly');
+                _controller.purchase(_controller
+                    .products[_controller.selectedIndex.value].identifier);
               },
               borderRadius: BorderRadius.circular(50),
               child: Container(
@@ -312,7 +315,13 @@ class PurchaseScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Utils.jumpPage(
+                        context,
+                        const TermsAndConditions(
+                            url:
+                                "https://www.termsfeed.com/live/f2b86595-49c9-41e7-b807-871b3cd9d989"));
+                  },
                   child: const Text(
                     'Privacy policy',
                     style: TextStyle(
@@ -327,7 +336,13 @@ class PurchaseScreen extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Utils.jumpPage(
+                        context,
+                        const TermsAndConditions(
+                            url:
+                                "https://www.termsfeed.com/live/f2b86595-49c9-41e7-b807-871b3cd9d989"));
+                  },
                   child: const Text(
                     'Terms of use',
                     style: TextStyle(

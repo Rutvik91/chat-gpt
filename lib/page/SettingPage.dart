@@ -12,6 +12,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -199,7 +200,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                 Share.share(
                   Platform.isAndroid
                       ? 'https://play.google.com/store/apps/details?id=com.binarybox.chatbuddy'
-                      : "https://apps.apple.com/app/id***",
+                      : "https://apps.apple.com/us/app/chat-buddy-ai-bot/id6448101363",
                 );
               },
             ),
@@ -240,11 +241,20 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       ),
                     ),
                     submitButtonText: 'Submit',
-                    commentHint: 'Set your custom comment hint',
+                    commentHint: 'Type your comment here',
                     onCancelled: () => print('cancelled'),
-                    onSubmitted: (response) {
-                      print(
-                          'rating: ${response.rating}, comment: ${response.comment}');
+                    onSubmitted: (response) async {
+                      Uri url = Uri.parse(
+                          'https://itunes.apple.com/app/id6448101363?action=write-revie');
+                      try {
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                 );

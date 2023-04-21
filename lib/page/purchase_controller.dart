@@ -45,8 +45,10 @@ class PurchaseController extends GetxController {
   fetchSubscriptions() async {
     try {
       List<StoreProduct> response =
-          await Purchases.getProducts(["weekly", "yearly"]);
+          await Purchases.getProducts(["weekly", "monthly", "yearly"]);
       products = response;
+      print(products);
+      // await Purchases.getOfferings().then((value) => print(value.toJson()));
     } catch (e) {
       showAppSnackBar(e.toString());
     }
@@ -55,7 +57,7 @@ class PurchaseController extends GetxController {
   Future<bool> purchase(String productIdentifier) async {
     loading.value = true;
     try {
-      var value = await Purchases.purchaseProduct(productIdentifier);
+      var value = await Purchases.purchaseProduct('weekly');
       final entitlement = value.entitlements.active['proUser'];
       loading.value = false;
       return entitlement != null;
